@@ -3,70 +3,90 @@ html, body {
     padding: 0;
     overflow: hidden;
     background: black;
-    font-family: 'Arial Black', sans-serif;
-}
-
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
 }
 
 #fireworks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     pointer-events: none;
 }
 
 #title {
-    position: absolute;
-    top: 40%;
-    width: 100%;
-    text-align: center;
     font-size: 64px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    animation: glow 3s infinite linear, rotateRGB 6s infinite linear;
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+
+    animation:
+        rgbColor 6s linear infinite,
+        glowPulse 2.5s ease-in-out infinite,
+        floatRotate 8s ease-in-out infinite;
+
+    text-shadow:
+        0 0 10px red,
+        0 0 20px red,
+        0 0 40px red;
+}
+
+
+#loading {
+    margin-top: 20px;
+    font-size: 20px;
+    color: gold;
 }
 
 @keyframes glow {
-    0% { text-shadow: 0 0 20px red; }
-    50% { text-shadow: 0 0 40px cyan; }
-    100% { text-shadow: 0 0 20px red; }
+    from { text-shadow: 0 0 10px lime; }
+    to   { text-shadow: 0 0 40px lime; }
+}
+@keyframes rgbColor {
+    0%   { color: rgb(255, 0, 0); }
+    16%  { color: rgb(255, 165, 0); }
+    33%  { color: rgb(255, 255, 0); }
+    50%  { color: rgb(0, 255, 0); }
+    66%  { color: rgb(0, 255, 255); }
+    83%  { color: rgb(0, 0, 255); }
+    100% { color: rgb(255, 0, 255); }
 }
 
-@keyframes rotateRGB {
-    0% { color: red; }
-    33% { color: lime; }
-    66% { color: cyan; }
-    100% { color: red; }
+@keyframes glowPulse {
+    0% {
+        text-shadow:
+            0 0 10px currentColor,
+            0 0 20px currentColor,
+            0 0 40px currentColor;
+    }
+    100% {
+        text-shadow:
+            0 0 20px currentColor,
+            0 0 40px currentColor,
+            0 0 80px currentColor;
+    }
 }
 
-.city {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(#111, #000);
+@keyframes floatRotate {
+    0%   { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(-8px) rotate(1deg); }
+    100% { transform: translateY(0) rotate(0deg); }
 }
 
-.city::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        repeating-linear-gradient(
-            to right,
-            #222 0 40px,
-            #111 40px 80px
-        );
-}
-
-#locationText {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    color: gold;
-    font-size: 22px;
-}
