@@ -1,0 +1,72 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+    font-family: 'Arial Black', sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#fireworks {
+    pointer-events: none;
+}
+
+#title {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 64px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    animation: glow 3s infinite linear, rotateRGB 6s infinite linear;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 20px red; }
+    50% { text-shadow: 0 0 40px cyan; }
+    100% { text-shadow: 0 0 20px red; }
+}
+
+@keyframes rotateRGB {
+    0% { color: red; }
+    33% { color: lime; }
+    66% { color: cyan; }
+    100% { color: red; }
+}
+
+.city {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(#111, #000);
+}
+
+.city::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            to right,
+            #222 0 40px,
+            #111 40px 80px
+        );
+}
+
+#locationText {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: gold;
+    font-size: 22px;
+}
